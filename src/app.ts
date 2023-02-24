@@ -1,66 +1,118 @@
-// for(let i = 0;i<3;i++){
-//     setTimeout(()=>console.log(i));
+//to deploy watch-mode:
+//deploy Git Bash
+//in Git Bash type: tsc --watch
+//-------------------------------------------------------------
+
+//Strings------------------------------------------------------
+const fName: string = 'Jakob';
+const sentence: string = `Hello, my name is ${fName}`
+
+//null & undefined types--------------------------------------
+//JavaScript
+typeof null; //object
+typeof undefined //undefined
+//TypeScript types:
+const u: undefined = undefined;
+const n: null = null;
+
+//Void type----------------------------------------------------
+//For function result
+const greetUser = (): void => {
+    console.log("Hello,nice to see you");
+}
+// const greetUser: void = () => { // expected Type '() => void' is not assignable to type 'void'.
+// console.log("Hello,nice to see you");
 // }
-let num: number;
-num = 12;
-let str: string = "abcd";
-str = "lmn"
-let style: "backgroundColor" | "color" | " ";
-style = " ";
-let color: "red" | "blue" | "green";
-function f1(n1: number, n2: number): number {
-    return n1 + n2
+
+//Array type---------------------------------------------------
+let list: number[] = [1, 2, 3];
+let list1: Array<number> = [1, 2, 3]; //Generic type
+
+// Tuple type--------------------------------------------------
+//multiple lines
+let myTuple: [number, boolean, string] = [12, true, "hello"]
+// myTuple = [12, true, "hello", "new string"] // Type '[number, true, string, string]' is not assignable to type '[number, boolean, string]'.
+// Source has 4 element(s) but target allows only 3.
+myTuple.push("new string")
+// console.log(myTuple) //expected [12,true,"hello","new string"]  
+let x: [string, number];
+x = ["hello", 10]
+//one line
+let y: [string, number] = ["goodbye", 42];
+//error case
+// x = [10,"hello"] // expected "Type 'string' is not assignable to type 'number'.","Type 'number' is not assignable to type 'string'."
+
+// Any type-----------------------------------------------------
+// Any type of array
+let y1: [any, any] = ["goodbye", 42];
+let z: Array<any> = [10, "hello", true, undefined, null, NaN];
+let notSure: any;
+notSure = true;
+notSure = 42;
+notSure = "Hello";
+
+// Enum type----------------------------------------------------
+enum Directions {              // | enum Directions {
+    Up,                        // |     Up = 2,                        
+    Down,                      // |     Down = 4,
+    Left,                      // |     Left = 6,
+    Right                      // |     Right
+}                // index         | }
+Directions.Up    // 0             | Directions.Up    // 2
+Directions.Down  // 1             | Directions.Down  // 4
+Directions.Left  // 2             | Directions.Left  // 6
+Directions.Right // 3             | Directions.Right // 7  <-- since the last initialized index was "6"
+Directions[0]    // "Up"          | Direction[6]     // "Left"
+Directions[1]    // "Down"        | Direction[7]     // "Right"
+Directions[2]    // "Left"
+Directions[3]    // "Right"
+// Custom name for keys:
+enum links {
+    youtube = 'https://youtube.com',
+    facebook = 'https://facebook.com',
 }
-// f1(1, "2"); // expected error because of f1 n2 is declared as number-type
-function f2(array: number[]): number {
-    return array.reduce((res, curr) => res + curr);
+// Usage:
+links.youtube  // 'https://youtube.com'
+links.facebook // 'https://facebook.com'
+// without compiling a function in JS
+const enum links1 {
+    youtube = 'https://youtube.com',
+    facebook = 'https://facebook.com',
 }
-function stringNumberAction(strNum: string | number): number {
-    let res: number;
-    if (typeof strNum == "string") {
-        res = strNum.length;
-    } else {
-        res = strNum * 2;
+// Usage
+const arr = [links1.youtube, links1.facebook];
+// Compiled code:
+//"use strict";
+// const arr = ["https://youtube.com" /* links1.youtube */, "https://facebook.com" /* links1.facebook */];
+
+
+
+// Never type
+// Function return Error
+const msg = "Hello";
+const error = (msg: string): never => {
+    throw new Error(msg)
+}
+// function infinite loop
+const infiniteLoop = (): never => {
+    while (true) {
     }
-    return res;
-}
-console.log(stringNumberAction(10))
-let ar: number[] | string[]
-ar = [1, 2, 3]
-ar = ["1", "g"]
-let ar1: (number | string)[]
-ar1 = [1, "a"];
-type Color = "red" | "blue" | "green" | "grey" | "yellow";
-let someColor: Color;
-type Comparator = (num1: number, num2: number) => number;
-let someComparator: Comparator;
-someComparator = (n1, n2) => n1 - n2;
-someComparator = (f1)
-type Person = {
-    id: number,
-    name: string,
-    age?: number // ? is not must have
-}
-const person: Person = { id: 123, name: "Vasya" };
-//hw29
-function shiftRound(str: string, shift: number = 1): string {
-    //TODO
-    //shift must be any positive number
-    //adds shift to ASCII codes of lower case letters
-    //if the shifted code will be greater then ASCII code "z"
-    //the code should be begun from ASCII code "a"
-    //source letter 'a' will be 'c' if "shift" = 2
-    //source letter 'z' will be 'b' if "shift" = 2   
-    //example  shiftRound("aabx!",4) => ("eefb!") 
-    return " "
-}
-function unshiftRound(str: string, shift: number = 1): string {
-    //shift must be any positive number
-    //subtracts shift to ASCII codes of lower case letters
-    //if the shifted code will be greater then ASCII code "z"
-    //the code should be begun from ASCII code "a"
-    //source letter 'a' will be 'c' if "shift" = 2
-    //source letter 'z' will be 'b' if "shift" = 2   
-    //example  unshiftRound("eefb!",4) => ("aabx!!") 
-    return " "
-}
+};
+
+// Object type-------------------------------------------------
+const create = (o: object | null): void => { };
+// create(1); //Argument of type 'number' is not assignable to parameter of type 'object'.
+// create("42") //Argument of type 'string' is not assignable to parameter of type 'object'.
+create({ obj: 1 })
+
+// Multiple types for one value
+let id: number | string;
+id = 12;
+id = "hello";
+// id = true; // Type 'boolean' is not assignable to type 'string | number'.
+
+// Type
+type Name = string;
+let lastName: Name;
+lastName = "Smith" // No Error, because type of "Smith" is string
+// lastName = 10;     // Type 'number' is not assignable to type 'string'.

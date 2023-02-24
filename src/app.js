@@ -1,62 +1,101 @@
 "use strict";
-// for(let i = 0;i<3;i++){
-//     setTimeout(()=>console.log(i));
+//to deploy watch-mode:
+//deploy Git Bash
+//in Git Bash type: tsc --watch
+//-------------------------------------------------------------
+//Strings------------------------------------------------------
+const fName = 'Jakob';
+const sentence = `Hello, my name is ${fName}`;
+//null & undefined types--------------------------------------
+//JavaScript
+typeof null; //object
+typeof undefined; //undefined
+//TypeScript types:
+const u = undefined;
+const n = null;
+//Void type----------------------------------------------------
+//For function result
+const greetUser = () => {
+    console.log("Hello,nice to see you");
+};
+// const greetUser: void = () => { // expected Type '() => void' is not assignable to type 'void'.
+// console.log("Hello,nice to see you");
 // }
-let num;
-num = 12;
-let str = "abcd";
-str = "lmn";
-let style;
-style = " ";
-let color;
-function f1(n1, n2) {
-    return n1 + n2;
-}
-// f1(1, "2"); // expected error because of f1 n2 is declared as number-type
-function f2(array) {
-    return array.reduce((res, curr) => res + curr);
-}
-function stringNumberAction(strNum) {
-    let res;
-    if (typeof strNum == "string") {
-        res = strNum.length;
+//Array type---------------------------------------------------
+let list = [1, 2, 3];
+let list1 = [1, 2, 3]; //Generic type
+// Tuple type--------------------------------------------------
+//multiple lines
+let myTuple = [12, true, "hello"];
+// myTuple = [12, true, "hello", "new string"] // Type '[number, true, string, string]' is not assignable to type '[number, boolean, string]'.
+// Source has 4 element(s) but target allows only 3.
+myTuple.push("new string");
+// console.log(myTuple) //expected [12,true,"hello","new string"]  
+let x;
+x = ["hello", 10];
+//one line
+let y = ["goodbye", 42];
+//error case
+// x = [10,"hello"] // expected "Type 'string' is not assignable to type 'number'.","Type 'number' is not assignable to type 'string'."
+// Any type-----------------------------------------------------
+// Any type of array
+let y1 = ["goodbye", 42];
+let z = [10, "hello", true, undefined, null, NaN];
+let notSure;
+notSure = true;
+notSure = 42;
+notSure = "Hello";
+// Enum type----------------------------------------------------
+var Directions;
+(function (Directions) {
+    Directions[Directions["Up"] = 0] = "Up";
+    Directions[Directions["Down"] = 1] = "Down";
+    Directions[Directions["Left"] = 2] = "Left";
+    Directions[Directions["Right"] = 3] = "Right"; // |     Right
+})(Directions || (Directions = {})); // index         | }
+Directions.Up; // 0             | Directions.Up    // 2
+Directions.Down; // 1             | Directions.Down  // 4
+Directions.Left; // 2             | Directions.Left  // 6
+Directions.Right; // 3             | Directions.Right // 7  <-- since the last initialized index was "6"
+Directions[0]; // "Up"          | Direction[6]     // "Left"
+Directions[1]; // "Down"        | Direction[7]     // "Right"
+Directions[2]; // "Left"
+Directions[3]; // "Right"
+// Custom name for keys:
+var links;
+(function (links) {
+    links["youtube"] = "https://youtube.com";
+    links["facebook"] = "https://facebook.com";
+})(links || (links = {}));
+// Usage:
+links.youtube; // 'https://youtube.com'
+links.facebook; // 'https://facebook.com'
+// Usage
+const arr = ["https://youtube.com" /* links1.youtube */, "https://facebook.com" /* links1.facebook */];
+// Compiled code:
+//"use strict";
+// const arr = ["https://youtube.com" /* links1.youtube */, "https://facebook.com" /* links1.facebook */];
+// Never type
+// Function return Error
+const msg = "Hello";
+const error = (msg) => {
+    throw new Error(msg);
+};
+// function infinite loop
+const infiniteLoop = () => {
+    while (true) {
     }
-    else {
-        res = strNum * 2;
-    }
-    return res;
-}
-console.log(stringNumberAction(10));
-let ar;
-ar = [1, 2, 3];
-ar = ["1", "g"];
-let ar1;
-ar1 = [1, "a"];
-let someColor;
-let someComparator;
-someComparator = (n1, n2) => n1 - n2;
-someComparator = (f1);
-const person = { id: 123, name: "Vasya" };
-//hw29
-function shiftRound(str, shift = 1) {
-    //TODO
-    //shift must be any positive number
-    //adds shift to ASCII codes of lower case letters
-    //if the shifted code will be greater then ASCII code "z"
-    //the code should be begun from ASCII code "a"
-    //source letter 'a' will be 'c' if "shift" = 2
-    //source letter 'z' will be 'b' if "shift" = 2   
-    //example  shiftRound("aabx!",4) => ("eefb!") 
-    return " ";
-}
-function unshiftRound(str, shift = 1) {
-    //shift must be any positive number
-    //subtracts shift to ASCII codes of lower case letters
-    //if the shifted code will be greater then ASCII code "z"
-    //the code should be begun from ASCII code "a"
-    //source letter 'a' will be 'c' if "shift" = 2
-    //source letter 'z' will be 'b' if "shift" = 2   
-    //example  unshiftRound("eefb!",4) => ("aabx!!") 
-    return " ";
-}
+};
+// Object type-------------------------------------------------
+const create = (o) => { };
+// create(1); //Argument of type 'number' is not assignable to parameter of type 'object'.
+// create("42") //Argument of type 'string' is not assignable to parameter of type 'object'.
+create({ obj: 1 });
+// Multiple types for one value
+let id;
+id = 12;
+id = "hello";
+let lastName;
+lastName = "Smith"; // No Error, because type of "Smith" is string
+// lastName = 10;     // Type 'number' is not assignable to type 'string'.
 //# sourceMappingURL=app.js.map
