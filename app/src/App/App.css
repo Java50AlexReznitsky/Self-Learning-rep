@@ -1,14 +1,11 @@
-* {
-    font-family: Arial, Helvetica, sans-serif, cursive;
-    color: black;
+#root{
+    margin: 40px auto;
+    max-width: 1000px;
+    background: #c0c0c0;
+    padding: 10px;
 }
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-areas:
-        "h h h"
-        "m m s"
-        "f f f";
+.test{
+    width: 100px;
+    height: 100px;
+    background: orange;
 }
