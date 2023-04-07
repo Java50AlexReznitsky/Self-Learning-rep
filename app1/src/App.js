@@ -11,10 +11,11 @@ function App() {
   return (
     <div className="mainDiv">
       <h1>Calculate number</h1>
-      <input ref={inputRef} className="inputStyle" onChange={e => setNumber(e.target.value)} placeholder="Set initial number" type="number" />
+      <input ref={inputRef} className="inputStyle" onChange={e => setNumber(e.target.value)}
+       placeholder="Set initial number" type="number" />
       <input onChange={e => setNumber2(e.target.value)} placeholder="Set calc number" type="number" />
       <Functions props={numbArr} />
-
+    
 
     </div>
   )
