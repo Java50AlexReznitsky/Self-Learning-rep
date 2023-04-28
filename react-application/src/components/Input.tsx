@@ -6,7 +6,6 @@ type Props = {
     buttonName?: string;
 }
 export const Input: React.FC<Props> = ({ submitFn, placeHolder, buttonName }) => {
-    // const id = useRef<string>(Math.random().toString());
     const inputElement = useRef<HTMLInputElement>(null);
     const [message, setMessage] = useState<string>('')
 
@@ -19,7 +18,6 @@ export const Input: React.FC<Props> = ({ submitFn, placeHolder, buttonName }) =>
     }
 
     return <div>
-        {/* <input type="text" placeholder={placeHolder} id={id.current} /> */}
         <input type="text" placeholder={placeHolder} ref={inputElement} />
         <button onClick={inputProcess}>{buttonName || "GO"}</button>
         {message && <Alert message={message} />}
