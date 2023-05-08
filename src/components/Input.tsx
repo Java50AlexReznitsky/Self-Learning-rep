@@ -18,7 +18,7 @@ export const Input: React.FC<Props> = ({ submitFn, placeHolder, buttonName }) =>
     }
 
     return <div>
-        <input type="text" placeholder={placeHolder} ref={inputElement} />
+        <input style={{borderRadius:"4px",textAlign:"center"} } type="text" placeholder={placeHolder} ref={inputElement} />
         <button onClick={inputProcess}>{buttonName || "GO"}</button>
         {message && <Alert message={message} />}
     </div>

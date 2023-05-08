@@ -5,7 +5,7 @@ type Props = {
 }
 export const CounterMultiply: React.FC<Props> = ({ factor }) => {
     const counter = useSelector<any, number>(state => state.count.counter); // counter = global state
-    return <div>
-        <p>{counter * factor}</p>
-    </div>
+    return <>
+        <p>{counter} * {factor} = {counter * factor}</p>
+    </>
 }
