@@ -14,11 +14,8 @@ export const StateMachine: React.FC = () => {
     return <>
         {/* {!authUser && <><Login /> <button onClick={()=>(dispatch(authActions.login('admin')))}>Login As Admin</button></>} */}
         {!authUser && <><Login /></>}
-
-        {authUser && !authUser.includes('admin') &&
-            (<>Logged in as client<CounterUpdater operand={2} /><CounterSquare /><Logout /></>)}
-
-        {authUser && authUser.includes('admin') &&
-            (<>Logged in as admin<CounterUpdater operand={2} /> <CounterSquare /><CounterMultiply factor={2} /> <Logout /> </>)}
+        {authUser && !authUser.includes('admin') && (<>Logged in as client<CounterUpdater operand={2} /><CounterSquare /><Logout /></>)}
+        {authUser && authUser.includes('admin') && (<>Logged in as admin<CounterUpdater operand={2} />
+            <CounterSquare /><CounterMultiply factor={2} /> <Logout /> </>)}
     </>
 }
