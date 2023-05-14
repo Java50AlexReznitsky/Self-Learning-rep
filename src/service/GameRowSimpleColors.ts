@@ -10,7 +10,7 @@ export default class GameRowSimpleColors implements GameRow {
             .map((__, index) => ({
                 cellColor: getRandomElement(getColors()),
                 borderColor: 'black',
-                cellContent: '',
+                cellContent: `${index}`,
                 id: index,
             }));
     }

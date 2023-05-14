@@ -35,3 +35,7 @@ p:hover {
   background-color: rgb(226, 255, 247);
   transition-duration: 1s;
 }
+div{
+  border-radius: 5px;
+  margin: 2px;
+}
